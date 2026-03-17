@@ -1,0 +1,59 @@
+name: Build Release APK
+
+on:
+  push:
+    branches:
+      - main
+      - release
+    paths:
+      - 'src/**'
+      - 'build.gradle.kts'
+      - '.github/workflows/build-release.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ☕ Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: ✅ Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: 🔐 Decode Keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > wisttrans.jks
+
+      - name: 🏗️ Build Release APK
+        env:
+          KEYSTORE_FILE: wisttrans.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew assembleRelease
+
+      - name: 📦 Upload APK to Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/outputs/apk/release/*.apk
+          tag: v1.01
+          bodyFile: RELEASE_NOTES.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+        if: startsWith(github.ref, 'refs/tags/')
+
+      - name: 📤 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: build/outputs/apk/release/
+          retention-days: 30
