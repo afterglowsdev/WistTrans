@@ -8,6 +8,7 @@ on:
     paths:
       - 'src/**'
       - 'build.gradle.kts'
+      - 'settings.gradle.kts'
       - 'gradlew'
       - 'gradlew.bat'
       - 'gradle/**'
@@ -27,6 +28,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: ✅ Setup Gradle
         uses: gradle/actions/setup-gradle@v3
