@@ -9,6 +9,7 @@ on:
       - 'src/**'
       - 'build.gradle.kts'
       - 'settings.gradle.kts'
+      - 'gradle.properties'
       - 'gradlew'
       - 'gradlew.bat'
       - 'gradle/**'
