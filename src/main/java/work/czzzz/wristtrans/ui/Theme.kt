@@ -1,4 +1,4 @@
-package work.czzzz.wisttrans.ui
+package work.czzzz.wristtrans.ui
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme

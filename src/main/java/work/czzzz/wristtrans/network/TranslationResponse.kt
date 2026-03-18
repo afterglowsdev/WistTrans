@@ -1,4 +1,4 @@
-package work.czzzz.wisttrans.network
+package work.czzzz.wristtrans.network
 
 import com.google.gson.annotations.SerializedName
 

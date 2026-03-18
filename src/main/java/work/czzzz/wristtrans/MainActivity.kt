@@ -1,4 +1,4 @@
-package work.czzzz.wisttrans
+package work.czzzz.wristtrans
 
 import android.content.Intent
 import android.os.Bundle

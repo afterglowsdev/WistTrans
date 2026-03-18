@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "work.czzzz.wisttrans"
+    namespace = "work.czzzz.wristtrans"
     compileSdk = 34
 
     signingConfigs {
@@ -17,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "work.czzzz.wisttrans"
+        applicationId = "work.czzzz.wristtrans"
         minSdk = 28
         targetSdk = 34
         versionCode = 101

@@ -1,4 +1,4 @@
-package work.czzzz.wisttrans.network
+package work.czzzz.wristtrans.network
 
 import retrofit2.Call
 import retrofit2.http.GET
