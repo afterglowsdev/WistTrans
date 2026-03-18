@@ -3,15 +3,15 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-val keystorePath = System.getenv("KEYSTORE_PATH")
-val keystorePassword = System.getenv("KEYSTORE_PASSWORD")
-val keyAlias = System.getenv("KEY_ALIAS")
-val keyPassword = System.getenv("KEY_PASSWORD")
+val envKeystorePath = System.getenv("KEYSTORE_PATH")
+val envKeystorePassword = System.getenv("KEYSTORE_PASSWORD")
+val envKeyAlias = System.getenv("KEY_ALIAS")
+val envKeyPassword = System.getenv("KEY_PASSWORD")
 val hasReleaseSigning =
-    !keystorePath.isNullOrBlank() &&
-        !keystorePassword.isNullOrBlank() &&
-        !keyAlias.isNullOrBlank() &&
-        !keyPassword.isNullOrBlank()
+    !envKeystorePath.isNullOrBlank() &&
+        !envKeystorePassword.isNullOrBlank() &&
+        !envKeyAlias.isNullOrBlank() &&
+        !envKeyPassword.isNullOrBlank()
 
 android {
     namespace = "work.czzzz.wristtrans"
@@ -33,10 +33,10 @@ android {
     signingConfigs {
         create("release") {
             if (hasReleaseSigning) {
-                storeFile = file(keystorePath!!)
-                storePassword = keystorePassword
-                this.keyAlias = keyAlias
-                this.keyPassword = keyPassword
+                storeFile = file(envKeystorePath!!)
+                storePassword = envKeystorePassword
+                keyAlias = envKeyAlias
+                keyPassword = envKeyPassword
                 enableV1Signing = true
                 enableV2Signing = true
             }
